@@ -1,0 +1,17 @@
+# Aversive configuration
+MCU = atmega2560
+OPT = s
+FORMAT = ihex
+FORMAT_EXTENSION = hex
+MATH_LIB = -lm
+PRINTF_LDFLAGS = -Wl,-u,vfprintf -lprintf_flt
+PROGRAMMER = avrdude
+AVRDUDE_PROGRAMMER = avrisp2
+AVRDUDE_PORT = "usb"
+AVRDUDE_BAUDRATE = 19200
+AVRDUDE_FLAGS_SIGNATURE_CHECK = -F
+AVARICE_PROGRAMMER = mkI
+AVARICE_PORT = "/dev/ttyS0"
+AVARICE_DEBUG_PORT = 1234
+MODULES = ihm/parse ihm/rdline ihm/vt100 devices/servo/ax12 devices/encoders/encoders_hctl devices/robot/trajectory_manager devices/robot/blocking_detection_manager devices/robot/obstacle_avoidance devices/robot/position_manager devices/robot/robot_system devices/control_system/filters/pid devices/control_system/filters/quadramp devices/control_system/control_system_manager base/time base/scheduler comm/spi comm/uart hardware/pwm_ng hardware/adc hardware/timer base/cirbuf debug/diagnostic debug/error base/math/fixed_point base/math/geometry base/math/vect2 base/arduino
+
