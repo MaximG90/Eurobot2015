@@ -1,0 +1,14 @@
+# Windows tests
+.directory
+
+# Build files and repository
+*~
+.*.swp
+*.eep
+*.elf
+*.hex
+compiler_files
+
+# aversive directory (now a submodule project)
+aversive
+
