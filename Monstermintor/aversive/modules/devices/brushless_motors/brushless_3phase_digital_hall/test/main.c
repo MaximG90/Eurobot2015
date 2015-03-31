@@ -111,7 +111,7 @@ int main(void)
 
 
 	uart_init();
-	fdevopen((void *)uart0_send,NULL,0);
+	fdevopen((void *)uart0_dev_send, NULL,0);
 
 	printf_P(PSTR("\nbonjour\n"));
 	sei();

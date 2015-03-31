@@ -54,7 +54,6 @@ struct blocking_detection {
 	uint16_t debug_cpt;
 #endif
 
-
 	int32_t prev_pos;
 	int32_t speed;
 };

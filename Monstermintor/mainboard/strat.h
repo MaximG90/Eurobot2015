@@ -25,7 +25,7 @@
 
 /*
  * Positions are measured in a frame based on a cartesian coordinate system
- * centered on the blue start area corner. Angles are measured in the
+ * centered on the top left corner. Angles are measured in the
  * trigonometric direction.
  *
  *                                     x <----o
@@ -34,7 +34,7 @@
  *    |      +---+---+---+---+---+---+      | v
  *    |      | 4 | ° |   |   | ° |   |      | y
  *    |      +---+---+---+---+---+---+      |
- *    |      | 3 |   |   |   |   |   |      |
+ *    |      | 3 |   |   |   |   |   |      |  // PAS A JOUR !
  *    |      +---+---+---+---+---+---+      |
  *  y |      | 2 | ° |   |   | ° |   |      |
  *  ^ |      +---+---+---+---+---+---+      |
@@ -45,7 +45,7 @@
  *  o---------->  x
  *
  *  To keep the coordinates system simple, the trigonometric direction must be
- *  preserved when the robot starts in the red area. If we kept the same axis
+ *  preserved when the robot starts in the green or yellow area. If we kept the same axis
  *  origin, angles would have to be inverted for relative displacements and
  *  subtracted from pi for absolute displacements. This makes software
  *  development error prone. To avoid this, we move the coordinate system origin
@@ -53,8 +53,8 @@
  *  inverted.
  */
 
-#define ROBOT_COLOR_DEFAULT_NAME	"blue"
-#define ROBOT_COLOR_ALTERNATE_NAME	"red"
+#define ROBOT_COLOR_DEFAULT_NAME	"yellow"
+#define ROBOT_COLOR_ALTERNATE_NAME	"green"
 
 /* convert coords according to our color */
 #define COLOR_X(x)			(x)
@@ -68,8 +68,8 @@
 #define AREA_X				3000
 #define AREA_Y				2000
 
-#define START_X				(ROBOT_BACK_LENGTH)
-#define START_Y				(790 - ROBOT_FRONT_LENGTH)
+#define START_X				(ROBOT_BACK_LENGTH + 70) 
+#define START_Y				1000 // pour calibration
 #define START_A				0
 
 #define SQUARE_SIZE			250

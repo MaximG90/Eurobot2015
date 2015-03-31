@@ -25,23 +25,15 @@
 
 int main(void)
 {
-	
-	
-	
-	struct pwm_ng pwm1_4A;
-	struct pwm_ng pwm2_4B;
+	struct pwm_ng pwm;
 
+	pwm_ng_timer_16bits_init(1, TIMER_16_MODE_PWM_10, 
+				 TIMER1_PRESCALER_DIV_256);
 	
-	PWM_NG_TIMER_16BITS_INIT(4, TIMER_16_MODE_PWM_PC_10, TIMER4_PRESCALER_DIV_8);
-	
-	PWM_NG_TIMER_16BITS_INIT(1, TIMER_16_MODE_PWM_PC_10, TIMER1_PRESCALER_DIV_8);
+	pwm_ng_init(&pwm, 16, 10, PWM_NG_MODE_SIGNED,
+		    &OCR1A, COM1A0, &TCCR1A, &PORTD, 3, &PORTE, 0);
 
-	PWM_NG_INIT16(&pwm1_4A, 1, A, 10,PWM_NG_MODE_SPECIAL_SIGN | PWM_NG_MODE_SIGNED, &PORTA, 4);
-	PWM_NG_INIT16(&pwm2_4B, 1, B, 10,PWM_NG_MODE_SPECIAL_SIGN | PWM_NG_MODE_SIGNED, &PORTA, 5);
-
-	pwm_ng_set(&pwm1_4A, 1000);
-	pwm_ng_set(&pwm2_4B, -2000);
-	
+	pwm_ng_set(&pwm, 100);
 
 	while(1);
 	return 0;

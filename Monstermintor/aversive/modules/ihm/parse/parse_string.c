@@ -18,9 +18,9 @@ struct token_ops token_string_ops = {
 #define FIXEDSTRING_HELP PSTR("Fixed STRING")
 
 static uint8_t
-get_token_len(const char * s)
+get_token_len(const prog_char * s)
 {
-        char c;
+        prog_char c;
 	uint8_t i=0;
 
 	c = pgm_read_byte(s+i);
@@ -31,8 +31,8 @@ get_token_len(const char * s)
         return i;
 }
 
-static const char *
-get_next_token(PGM_P s)
+static const prog_char *
+get_next_token(const prog_char * s)
 {
 	uint8_t i;
 	i = get_token_len(s);
@@ -42,11 +42,11 @@ get_next_token(PGM_P s)
 }
 
 int8_t 
-parse_string(PGM_P tk, const char * buf, void * res)
+parse_string(parse_pgm_token_hdr_t * tk, const char * buf, void * res)
 {
 	struct token_string_data sd;
 	uint8_t token_len;
-	PGM_P str;
+	const prog_char * str;
 
 	if (! *buf)
 		return -1;
@@ -100,7 +100,7 @@ parse_string(PGM_P tk, const char * buf, void * res)
         return token_len;
 }
 
-int8_t complete_get_nb_string(PGM_P tk)
+int8_t complete_get_nb_string(parse_pgm_token_hdr_t * tk)
 {
 	struct token_string_data sd;
 	int8_t ret=1;
@@ -116,11 +116,11 @@ int8_t complete_get_nb_string(PGM_P tk)
 	return ret;
 }
 
-int8_t complete_get_elt_string(PGM_P tk, int8_t idx, 
+int8_t complete_get_elt_string(parse_pgm_token_hdr_t * tk, int8_t idx, 
 			      char * dstbuf, uint8_t size)
 {
 	struct token_string_data sd;
-	PGM_P s;
+	const prog_char * s;
 	uint8_t len;
 
 	memcpy_P(&sd, &((struct token_string *)tk)->string_data, sizeof(sd));
@@ -143,10 +143,10 @@ int8_t complete_get_elt_string(PGM_P tk, int8_t idx,
 }
 
 
-int8_t get_help_string(PGM_P tk, char * dstbuf, uint8_t size)
+int8_t get_help_string(parse_pgm_token_hdr_t * tk, char * dstbuf, uint8_t size)
 {
 	struct token_string_data sd;
-	PGM_P s;
+	const prog_char * s;
 	
 	memcpy_P(&sd, &((struct token_string *)tk)->string_data, sizeof(sd));
 	s = sd.str;

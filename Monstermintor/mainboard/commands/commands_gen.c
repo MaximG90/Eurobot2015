@@ -59,11 +59,11 @@ static void cmd_reset_parsed(void *parsed_result, void *data)
 }
 
 static const prog_char str_reset_arg0[] = "reset";
-static parse_token_string_t cmd_reset_arg0 =
+static const parse_pgm_token_string_t cmd_reset_arg0 =
 TOKEN_STRING_INITIALIZER(struct cmd_reset_result, arg0, str_reset_arg0);
 
 static const prog_char help_reset[] = "Reset the board";
-parse_inst_t cmd_reset = {
+const parse_pgm_inst_t  cmd_reset = {
 	.f = cmd_reset_parsed,
 	.data = NULL,
 	.help_str = help_reset,
@@ -89,12 +89,12 @@ static void cmd_bootloader_parsed(void *parsed_result, void *data)
 }
 
 static const prog_char str_bootloader_arg0[] = "bootloader";
-static parse_token_string_t cmd_bootloader_arg0 =
+static const parse_pgm_token_string_t cmd_bootloader_arg0 =
 TOKEN_STRING_INITIALIZER(struct cmd_bootloader_result, arg0,
 			 str_bootloader_arg0);
 
 static const prog_char help_bootloader[] = "Launch the bootloader";
-parse_inst_t cmd_bootloader = {
+const parse_pgm_inst_t  cmd_bootloader = {
 	.f = cmd_bootloader_parsed,
 	.data = NULL,
 	.help_str = help_bootloader,
@@ -134,26 +134,26 @@ static void cmd_buzzer_parsed(void *parsed_result, void *data)
 		tone = NONE_TONE;
 
 	if (tone != NONE_TONE) {
-		//PORTJ |= tone;
+		PORTJ |= tone;
 		printf_P(PSTR("wait for %d ms\n"), res->arg2);
 		wait_ms(res->arg2);
-		//PORTJ &= NONE_TONE;
+		PORTJ &= NONE_TONE;
 	}
 #endif
 	printf_P(PSTR("done\r\n"));
 }
 
 static const prog_char str_buzzer_arg0[] = "buzzer";
-static parse_token_string_t cmd_buzzer_arg0 =
+static const parse_pgm_token_string_t cmd_buzzer_arg0 =
 TOKEN_STRING_INITIALIZER(struct cmd_buzzer_result, arg0, str_buzzer_arg0);
 static const prog_char str_buzzer_arg1[] = "DO#SOL#LA";
-static parse_token_string_t cmd_buzzer_arg1 =
+static const parse_pgm_token_string_t cmd_buzzer_arg1 =
 TOKEN_STRING_INITIALIZER(struct cmd_buzzer_result, arg1, str_buzzer_arg1);
-static parse_token_num_t cmd_buzzer_arg2 =
+static const parse_pgm_token_num_t cmd_buzzer_arg2 =
 TOKEN_NUM_INITIALIZER(struct cmd_buzzer_result, arg2, INT16);
 
 static const prog_char help_buzzer[] = "buzzer tones (DO/SOL/LA) for xx ms";
-parse_inst_t cmd_buzzer = {
+const parse_pgm_inst_t  cmd_buzzer = {
 	.f = cmd_buzzer_parsed,
 	.data = NULL,
 	.help_str = help_buzzer,
@@ -231,14 +231,14 @@ static void cmd_encoders_parsed(void *parsed_result, void *data)
 }
 
 static const prog_char str_encoders_arg0[] = "encoders";
-static parse_token_string_t cmd_encoders_arg0 =
+static const parse_pgm_token_string_t cmd_encoders_arg0 =
 TOKEN_STRING_INITIALIZER(struct cmd_encoders_result, arg0, str_encoders_arg0);
 static const prog_char str_encoders_arg1[] = "hex#show#reset";
-static parse_token_string_t cmd_encoders_arg1 =
+static const parse_pgm_token_string_t cmd_encoders_arg1 =
 TOKEN_STRING_INITIALIZER(struct cmd_encoders_result, arg1, str_encoders_arg1);
 
 static const prog_char help_encoders[] = "Show encoders values";
-parse_inst_t cmd_encoders = {
+const parse_pgm_inst_t  cmd_encoders = {
 	.f = cmd_encoders_parsed,
 	.data = NULL,
 	.help_str = help_encoders,
@@ -269,14 +269,14 @@ static void cmd_scheduler_parsed(void *parsed_result, void *data)
 }
 
 static const prog_char str_scheduler_arg0[] = "scheduler";
-static parse_token_string_t cmd_scheduler_arg0 =
+static const parse_pgm_token_string_t cmd_scheduler_arg0 =
 TOKEN_STRING_INITIALIZER(struct cmd_scheduler_result, arg0, str_scheduler_arg0);
 static const prog_char str_scheduler_arg1[] = "show";
-static parse_token_string_t cmd_scheduler_arg1 =
+static const parse_pgm_token_string_t cmd_scheduler_arg1 =
 TOKEN_STRING_INITIALIZER(struct cmd_scheduler_result, arg1, str_scheduler_arg1);
 
 static const prog_char help_scheduler[] = "Show scheduler events";
-parse_inst_t cmd_scheduler = {
+const parse_pgm_inst_t  cmd_scheduler = {
 	.f = cmd_scheduler_parsed,
 	.data = NULL,
 	.help_str = help_scheduler,
@@ -334,17 +334,17 @@ static void cmd_pwm_parsed(void *parsed_result, void *data)
 }
 
 static const prog_char str_pwm_arg0[] = "pwm";
-static parse_token_string_t cmd_pwm_arg0 =
+static const parse_pgm_token_string_t cmd_pwm_arg0 =
 TOKEN_STRING_INITIALIZER(struct cmd_pwm_result, arg0, str_pwm_arg0);
 static const prog_char str_pwm_arg1[] =
     "1(4A)#2(4B)#3(1A)#4(1B)#s1(3C)#s2(5A)#s3(5B)#s4(5C)";
-static parse_token_string_t cmd_pwm_arg1 =
+static const parse_pgm_token_string_t cmd_pwm_arg1 =
 TOKEN_STRING_INITIALIZER(struct cmd_pwm_result, arg1, str_pwm_arg1);
-static parse_token_num_t cmd_pwm_arg2 =
+static const parse_pgm_token_num_t cmd_pwm_arg2 =
 TOKEN_NUM_INITIALIZER(struct cmd_pwm_result, arg2, INT16);
 
 static const prog_char help_pwm[] = "Set pwm values [-4096 ; 4095]";
-parse_inst_t cmd_pwm = {
+const parse_pgm_inst_t  cmd_pwm = {
 	.f = cmd_pwm_parsed,
 	.data = NULL,
 	.help_str = help_pwm,
@@ -403,14 +403,14 @@ static void cmd_adc_parsed(void *parsed_result, void *data)
 }
 
 static const prog_char str_adc_arg0[] = "adc";
-static parse_token_string_t cmd_adc_arg0 =
+static const parse_pgm_token_string_t cmd_adc_arg0 =
 TOKEN_STRING_INITIALIZER(struct cmd_adc_result, arg0, str_adc_arg0);
 static const prog_char str_adc_arg1[] = "show#loop_show";
-static parse_token_string_t cmd_adc_arg1 =
+static const parse_pgm_token_string_t cmd_adc_arg1 =
 TOKEN_STRING_INITIALIZER(struct cmd_adc_result, arg1, str_adc_arg1);
 
 static const prog_char help_adc[] = "Show adc values";
-parse_inst_t cmd_adc = {
+const parse_pgm_inst_t  cmd_adc = {
 	.f = cmd_adc_parsed,
 	.data = NULL,
 	.help_str = help_adc,
@@ -451,14 +451,14 @@ static void cmd_sensor_parsed(void *parsed_result, void *data)
 }
 
 static const prog_char str_sensor_arg0[] = "sensor";
-static parse_token_string_t cmd_sensor_arg0 =
+static const parse_pgm_token_string_t cmd_sensor_arg0 =
 TOKEN_STRING_INITIALIZER(struct cmd_sensor_result, arg0, str_sensor_arg0);
 static const prog_char str_sensor_arg1[] = "show#loop_show";
-static parse_token_string_t cmd_sensor_arg1 =
+static const parse_pgm_token_string_t cmd_sensor_arg1 =
 TOKEN_STRING_INITIALIZER(struct cmd_sensor_result, arg1, str_sensor_arg1);
 
 static const prog_char help_sensor[] = "Show sensor values";
-parse_inst_t cmd_sensor = {
+const parse_pgm_inst_t  cmd_sensor = {
 	.f = cmd_sensor_parsed,
 	.data = NULL,
 	.help_str = help_sensor,
@@ -485,17 +485,17 @@ struct cmd_log_result {
 };
 
 /* keep it sync with string choice */
-static const const prog_char uart_log[] = "uart";
-static const const prog_char rs_log[] = "rs";
-static const const prog_char traj_log[] = "traj";
-static const const prog_char oa_log[] = "oa";
-static const const prog_char strat_log[] = "strat";
-static const const prog_char sensor_log[] = "sensor";
-static const const prog_char block_log[] = "bd";
-static const const prog_char cs_log[] = "cs";
+static const prog_char  uart_log[] = "uart";
+static const prog_char  rs_log[] = "rs";
+static const prog_char  traj_log[] = "traj";
+static const prog_char  oa_log[] = "oa";
+static const prog_char  strat_log[] = "strat";
+static const prog_char  sensor_log[] = "sensor";
+static const prog_char  block_log[] = "bd";
+static const prog_char  cs_log[] = "cs";
 
 struct log_name_and_num {
-	const const prog_char *name;
+	const prog_char *name;
 	uint8_t num;
 };
 
@@ -521,7 +521,7 @@ static uint8_t log_name2num(const char *s)
 	return 0;
 }
 
-const const prog_char *log_num2name(uint8_t num)
+const prog_char *log_num2name(uint8_t num)
 {
 	uint8_t i;
 
@@ -534,7 +534,7 @@ const const prog_char *log_num2name(uint8_t num)
 
 static void cmd_log_do_show(void)
 {
-	const const prog_char *name;
+	const prog_char *name;
 	uint8_t empty = 1;
 	uint8_t i;
 
@@ -562,16 +562,16 @@ static void cmd_log_parsed(void *parsed_result, void *data)
 }
 
 static const prog_char str_log_arg0[] = "log";
-static parse_token_string_t cmd_log_arg0 =
+static const parse_pgm_token_string_t cmd_log_arg0 =
 TOKEN_STRING_INITIALIZER(struct cmd_log_result, arg0, str_log_arg0);
 static const prog_char str_log_arg1[] = "level";
-static parse_token_string_t cmd_log_arg1 =
+static const parse_pgm_token_string_t cmd_log_arg1 =
 TOKEN_STRING_INITIALIZER(struct cmd_log_result, arg1, str_log_arg1);
-static parse_token_num_t cmd_log_arg2 =
+static const parse_pgm_token_num_t cmd_log_arg2 =
 TOKEN_NUM_INITIALIZER(struct cmd_log_result, arg2, INT32);
 
 static const prog_char help_log[] = "Set log options: level (0 -> 5)";
-parse_inst_t cmd_log = {
+const parse_pgm_inst_t  cmd_log = {
 	.f = cmd_log_parsed,
 	.data = NULL,
 	.help_str = help_log,
@@ -584,11 +584,11 @@ parse_inst_t cmd_log = {
 };
 
 static const prog_char str_log_arg1_show[] = "show";
-static parse_token_string_t cmd_log_arg1_show =
+static const parse_pgm_token_string_t cmd_log_arg1_show =
 TOKEN_STRING_INITIALIZER(struct cmd_log_result, arg1, str_log_arg1_show);
 
 static const prog_char help_log_show[] = "Show configured logs";
-parse_inst_t cmd_log_show = {
+const parse_pgm_inst_t  cmd_log_show = {
 	.f = cmd_log_parsed,
 	.data = NULL,
 	.help_str = help_log_show,
@@ -648,18 +648,18 @@ static void cmd_log_type_parsed(void *parsed_result, void *data)
 }
 
 static const prog_char str_log_arg1_type[] = "type";
-static parse_token_string_t cmd_log_arg1_type =
+static const parse_pgm_token_string_t cmd_log_arg1_type =
 TOKEN_STRING_INITIALIZER(struct cmd_log_type_result, arg1, str_log_arg1_type);
 /* keep it sync with log_name_and_num above */
 static const prog_char str_log_arg2_type[] = "uart#rs#servo#traj#oa#strat#ext#sensor#bd#cs";
-static parse_token_string_t cmd_log_arg2_type =
+static const parse_pgm_token_string_t cmd_log_arg2_type =
 TOKEN_STRING_INITIALIZER(struct cmd_log_type_result, arg2, str_log_arg2_type);
 static const prog_char str_log_arg3[] = "on#off";
-static parse_token_string_t cmd_log_arg3 =
+static const parse_pgm_token_string_t cmd_log_arg3 =
 TOKEN_STRING_INITIALIZER(struct cmd_log_type_result, arg3, str_log_arg3);
 
 static const prog_char help_log_type[] = "Set log type";
-parse_inst_t cmd_log_type = {
+const parse_pgm_inst_t  cmd_log_type = {
 	.f = cmd_log_type_parsed,
 	.data = NULL,
 	.help_str = help_log_type,
@@ -688,12 +688,12 @@ static void cmd_stack_space_parsed(void *parsed_result, void *data)
 }
 
 static const prog_char str_stack_space_arg0[] = "stack_space";
-static parse_token_string_t cmd_stack_space_arg0 =
+static const parse_pgm_token_string_t cmd_stack_space_arg0 =
 TOKEN_STRING_INITIALIZER(struct cmd_stack_space_result, arg0,
 			 str_stack_space_arg0);
 
 static const prog_char help_stack_space[] = "Display remaining stack space";
-parse_inst_t cmd_stack_space = {
+const parse_pgm_inst_t  cmd_stack_space = {
 	.f = cmd_stack_space_parsed,
 	.data = NULL,
 	.help_str = help_stack_space,
@@ -725,14 +725,14 @@ static void cmd_ir_parsed(void *parsed_result, void *data)
 }
 
 static const prog_char str_ir_arg0[] = "ir";
-static parse_token_string_t cmd_ir_arg0 =
+static const parse_pgm_token_string_t cmd_ir_arg0 =
 TOKEN_STRING_INITIALIZER(struct cmd_ir_result, arg0, str_ir_arg0);
 static const prog_char str_ir_arg1[] = "on#off";
-static parse_token_string_t cmd_ir_arg1 =
+static const parse_pgm_token_string_t cmd_ir_arg1 =
 TOKEN_STRING_INITIALIZER(struct cmd_ir_result, arg1, str_ir_arg1);
 
 static const prog_char help_ir[] = "enable/disable IR transmitters";
-parse_inst_t cmd_ir = {
+const parse_pgm_inst_t  cmd_ir = {
 	.f = cmd_ir_parsed,
 	.data = NULL,
 	.help_str = help_ir,

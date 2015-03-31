@@ -37,16 +37,16 @@
 #define ADC_CSENSE4		10
 #define ADC_MAX			11
 
-#define S_CAP1			0
-#define S_CAP2			1
-#define S_CAP3			2
-#define S_CAP4			3
-#define S_CAP5			4
-#define S_CAP6			5
-#define S_CAP7			6
-#define S_CAP8			7
-#define S_CAP9			8
-#define S_CAP10			9
+#define S_CAP1			0 // Arduino pin A8
+#define S_CAP2			1 // Arduino pin A9
+#define S_CAP3			2 // Arduino pin A10
+#define S_CAP4			3 // Arduino pin A11
+#define S_CAP5			4 // Arduino pin A12
+#define S_CAP6			5 // Arduino pin 49
+#define S_CAP7			6 // Arduino pin 48
+#define S_CAP8			7 // Ne pas utiliser, ou redéfinir !
+#define S_CAP9			8 // Arduino pin 46
+#define S_CAP10			9 // Arduino pin 45
 #define S_RESERVED3		10
 #define S_RESERVED4		11
 #define S_RESERVED5		12
@@ -55,14 +55,18 @@
 #define S_RESERVED8		15
 #define SENSOR_MAX		10
 
-#define S_START_SWITCH		S_CAP6 // Arduino pin 48
-#define S_START_COLOR		S_CAP9 // Arduino pin 45
-#define S_AUTO_POS		S_CAP10 // Arduino pin 46 
-//#define S_OPPONENT_NEAR	S_CAP3 // Useless
-//#define S_OPPONENT_CONTACT	S_CAP4 // Useless
-//#define S_OPPONENT_FAR	S_CAP5 // Useless
-#define S_LIFT			S_CAP1 // Arduino pin 10
-#define S_LIFT_2		S_CAP2 // Arduino pin 11
+
+#define S_START_SWITCH_2	S_CAP6 // Unused
+#define S_START_SWITCH		S_CAP7 // Goupille
+#define S_AUTO_POS		S_CAP9 // Calibration
+#define S_START_COLOR		S_CAP10 // Choix du camp
+
+
+#define S_CAPTEUR_1		S_CAP1 // Unused
+#define S_CAPTEUR_2		S_CAP2 // Unused
+#define S_LIFT			S_CAP3 // Capteur pieds
+#define S_LIFT_2		S_CAP4 // Capteur goblets
+#define S_CAPTEUR_3		S_CAP5 // Unused
 
 
 void sensor_init(void);

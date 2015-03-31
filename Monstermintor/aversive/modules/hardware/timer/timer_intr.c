@@ -35,7 +35,7 @@ volatile timer_callback_t timer_callback_table[_VECTORS_SIZE/4];
 /*************************/
 
 #if defined TIMER0_ENABLED && defined TIMER0_OVF_vect
-DEFINE_OV_INTR(TIMER0_OVF_vect)
+//DEFINE_OV_INTR(TIMER0_OVF_vect)
 #endif
 
 #if defined TIMER0_ENABLED && defined TIMER0_COMP_vect

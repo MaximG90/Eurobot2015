@@ -134,10 +134,16 @@ static void print_banner(void)
 
 	printf_P(PSTR("\r\n"));
 	printf_P(PSTR("\r\n"));
-
-	printf_P(PSTR("\r\n\t\t               Monsterminator MB\n\r"));
-
+	for (i = 0; i < 80; i++)
+		printf_P(PSTR("*"));
+	printf_P(PSTR("\r\n\t\t        Mainboard Monsterminator\n\r"));
+	for (i = 0; i < 80; i++)
+		printf_P(PSTR("*"));
 	printf_P(PSTR("\r\n"));
+	printf_P(PSTR("\t                Compiled on %s at %s\n\r"), __DATE__, __TIME__);
+	printf_P(PSTR("\t                with GCC version (%s)\n\r"), __VERSION__);
+	printf_P(PSTR("\t                AVR_LIBC version (%d.%d.%d)\n\r"), __AVR_LIBC_MAJOR__,
+		 __AVR_LIBC_MINOR__, __AVR_LIBC_REVISION__);
 
 
 printf_P(PSTR("	   ###################################################    \r\n"));
@@ -266,7 +272,7 @@ int main(void)
 						LED_PRIO);
 
 	sei();
-
+  
 	print_banner();
 
 	actuators_default_position();
@@ -274,8 +280,11 @@ int main(void)
 	
 	
 	while (1) {
+
+		
 		cmdline_interact();
 
+		
 		if (sensor_get(S_START_COLOR)) {
 			mainboard.our_color = ROBOT_COLOR_DEFAULT;
 			NOTICE(E_USER_STRAT, "our color : " ROBOT_COLOR_DEFAULT_NAME);
@@ -292,6 +301,16 @@ int main(void)
 		printf_P(PSTR("start strat"));
 
 		strat_start();
+		
+			/*
+			struct AX12 *ax12 = &gen.ax12; 
+			AX12_set_position(ax12, ID_AX12_GUIDE, WING_RETRACTED);
+			wait_ms(2000);
+			AX12_set_position(ax12, ID_AX12_GUIDE, WING_RETRACTED);
+			wait_ms(2000);
+			AX12_set_position(ax12, ID_AX12_GUIDE, WING_RETRACTED);
+			wait_ms(2000);*/
+
 	}
 
 	return 0;

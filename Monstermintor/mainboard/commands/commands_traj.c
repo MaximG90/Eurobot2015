@@ -71,18 +71,18 @@ static void cmd_traj_speed_parsed(void *parsed_result, void *data)
 }
 
 static const prog_char str_traj_speed_arg0[] = "traj_speed";
-static parse_token_string_t cmd_traj_speed_arg0 =
+static const parse_pgm_token_string_t cmd_traj_speed_arg0 =
 TOKEN_STRING_INITIALIZER(struct cmd_traj_speed_result, arg0,
 			 str_traj_speed_arg0);
 static const prog_char str_traj_speed_arg1[] = "angle#distance";
-static parse_token_string_t cmd_traj_speed_arg1 =
+static const parse_pgm_token_string_t cmd_traj_speed_arg1 =
 TOKEN_STRING_INITIALIZER(struct cmd_traj_speed_result, arg1,
 			 str_traj_speed_arg1);
-static parse_token_num_t cmd_traj_speed_s =
+static const parse_pgm_token_num_t cmd_traj_speed_s =
 TOKEN_NUM_INITIALIZER(struct cmd_traj_speed_result, s, UINT16);
 
 static const prog_char help_traj_speed[] = "Set traj_speed values for trajectory manager";
-parse_inst_t cmd_traj_speed = {
+const parse_pgm_inst_t  cmd_traj_speed = {
 	.f = cmd_traj_speed_parsed,
 	.data = NULL,
 	.help_str = help_traj_speed,
@@ -97,13 +97,13 @@ parse_inst_t cmd_traj_speed = {
 /* show */
 
 static const prog_char str_traj_speed_show_arg[] = "show";
-static parse_token_string_t cmd_traj_speed_show_arg =
+static const parse_pgm_token_string_t cmd_traj_speed_show_arg =
 TOKEN_STRING_INITIALIZER(struct cmd_traj_speed_result, arg1,
 			 str_traj_speed_show_arg);
 
 static const prog_char help_traj_speed_show[] =
     "Show traj_speed values for trajectory manager";
-parse_inst_t cmd_traj_speed_show = {
+const parse_pgm_inst_t  cmd_traj_speed_show = {
 	.f = cmd_traj_speed_parsed,
 	.data = NULL,
 	.help_str = help_traj_speed_show,
@@ -140,23 +140,23 @@ static void cmd_trajectory_parsed(void *parsed_result, void *data)
 }
 
 static const prog_char str_trajectory_arg0[] = "trajectory";
-static parse_token_string_t cmd_trajectory_arg0 =
+static const parse_pgm_token_string_t cmd_trajectory_arg0 =
 TOKEN_STRING_INITIALIZER(struct cmd_trajectory_result, arg0,
 			 str_trajectory_arg0);
 static const prog_char str_trajectory_arg1[] = "set";
-static parse_token_string_t cmd_trajectory_arg1 =
+static const parse_pgm_token_string_t cmd_trajectory_arg1 =
 TOKEN_STRING_INITIALIZER(struct cmd_trajectory_result, arg1,
 			 str_trajectory_arg1);
-static parse_token_num_t cmd_trajectory_d =
+static const parse_pgm_token_num_t cmd_trajectory_d =
 TOKEN_NUM_INITIALIZER(struct cmd_trajectory_result, d_win, FLOAT);
-static parse_token_num_t cmd_trajectory_a =
+static const parse_pgm_token_num_t cmd_trajectory_a =
 TOKEN_NUM_INITIALIZER(struct cmd_trajectory_result, a_win, FLOAT);
-static parse_token_num_t cmd_trajectory_as =
+static const parse_pgm_token_num_t cmd_trajectory_as =
 TOKEN_NUM_INITIALIZER(struct cmd_trajectory_result, a_start, FLOAT);
 
 static const prog_char help_trajectory[] =
     "Set trajectory windows (distance, angle, angle_start)";
-parse_inst_t cmd_trajectory = {
+const parse_pgm_inst_t  cmd_trajectory = {
 	.f = cmd_trajectory_parsed,
 	.data = NULL,
 	.help_str = help_trajectory,
@@ -173,12 +173,12 @@ parse_inst_t cmd_trajectory = {
 /* show */
 
 static const prog_char str_trajectory_show_arg[] = "show";
-static parse_token_string_t cmd_trajectory_show_arg =
+static const parse_pgm_token_string_t cmd_trajectory_show_arg =
 TOKEN_STRING_INITIALIZER(struct cmd_trajectory_result, arg1,
 			 str_trajectory_show_arg);
 
 static const prog_char help_trajectory_show[] = "Show trajectory window configuration";
-parse_inst_t cmd_trajectory_show = {
+const parse_pgm_inst_t  cmd_trajectory_show = {
 	.f = cmd_trajectory_parsed,
 	.data = NULL,
 	.help_str = help_trajectory_show,
@@ -215,18 +215,18 @@ static void cmd_rs_gains_parsed(void *parsed_result, void *data)
 }
 
 static const prog_char str_rs_gains_arg0[] = "rs_gains";
-static parse_token_string_t cmd_rs_gains_arg0 =
+static const parse_pgm_token_string_t cmd_rs_gains_arg0 =
 TOKEN_STRING_INITIALIZER(struct cmd_rs_gains_result, arg0, str_rs_gains_arg0);
 static const prog_char str_rs_gains_arg1[] = "set";
-static parse_token_string_t cmd_rs_gains_arg1 =
+static const parse_pgm_token_string_t cmd_rs_gains_arg1 =
 TOKEN_STRING_INITIALIZER(struct cmd_rs_gains_result, arg1, str_rs_gains_arg1);
-static parse_token_num_t cmd_rs_gains_l =
+static const parse_pgm_token_num_t cmd_rs_gains_l =
 TOKEN_NUM_INITIALIZER(struct cmd_rs_gains_result, left, FLOAT);
-static parse_token_num_t cmd_rs_gains_r =
+static const parse_pgm_token_num_t cmd_rs_gains_r =
 TOKEN_NUM_INITIALIZER(struct cmd_rs_gains_result, right, FLOAT);
 
 static const prog_char help_rs_gains[] = "Set rs_gains (left, right)";
-parse_inst_t cmd_rs_gains = {
+const parse_pgm_inst_t  cmd_rs_gains = {
 	.f = cmd_rs_gains_parsed,
 	.data = NULL,
 	.help_str = help_rs_gains,
@@ -242,12 +242,12 @@ parse_inst_t cmd_rs_gains = {
 /* show */
 
 static const prog_char str_rs_gains_show_arg[] = "show";
-static parse_token_string_t cmd_rs_gains_show_arg =
+static const parse_pgm_token_string_t cmd_rs_gains_show_arg =
 TOKEN_STRING_INITIALIZER(struct cmd_rs_gains_result, arg1,
 			 str_rs_gains_show_arg);
 
 static const prog_char help_rs_gains_show[] = "Show rs_gains";
-parse_inst_t cmd_rs_gains_show = {
+const parse_pgm_inst_t  cmd_rs_gains_show = {
 	.f = cmd_rs_gains_parsed,
 	.data = NULL,
 	.help_str = help_rs_gains_show,
@@ -279,16 +279,16 @@ static void cmd_track_parsed(void *parsed_result, void *data)
 }
 
 static const prog_char str_track_arg0[] = "track";
-static parse_token_string_t cmd_track_arg0 =
+static const parse_pgm_token_string_t cmd_track_arg0 =
 TOKEN_STRING_INITIALIZER(struct cmd_track_result, arg0, str_track_arg0);
 static const prog_char str_track_arg1[] = "set";
-static parse_token_string_t cmd_track_arg1 =
+static const parse_pgm_token_string_t cmd_track_arg1 =
 TOKEN_STRING_INITIALIZER(struct cmd_track_result, arg1, str_track_arg1);
-static parse_token_num_t cmd_track_val =
+static const parse_pgm_token_num_t cmd_track_val =
 TOKEN_NUM_INITIALIZER(struct cmd_track_result, val, FLOAT);
 
 static const prog_char help_track[] = "Set track in mm";
-parse_inst_t cmd_track = {
+const parse_pgm_inst_t  cmd_track = {
 	.f = cmd_track_parsed,
 	.data = NULL,
 	.help_str = help_track,
@@ -303,11 +303,11 @@ parse_inst_t cmd_track = {
 /* show */
 
 static const prog_char str_track_show_arg[] = "show";
-static parse_token_string_t cmd_track_show_arg =
+static const parse_pgm_token_string_t cmd_track_show_arg =
 TOKEN_STRING_INITIALIZER(struct cmd_track_result, arg1, str_track_show_arg);
 
 static const prog_char help_track_show[] = "Show track";
-parse_inst_t cmd_track_show = {
+const parse_pgm_inst_t  cmd_track_show = {
 	.f = cmd_track_parsed,
 	.data = NULL,
 	.help_str = help_track_show,
@@ -393,20 +393,20 @@ static void cmd_pt_list_parsed(void *parsed_result, void *data)
 }
 
 static const prog_char str_pt_list_arg0[] = "pt_list";
-static parse_token_string_t cmd_pt_list_arg0 =
+static const parse_pgm_token_string_t cmd_pt_list_arg0 =
 TOKEN_STRING_INITIALIZER(struct cmd_pt_list_result, arg0, str_pt_list_arg0);
 static const prog_char str_pt_list_arg1[] = "insert";
-static parse_token_string_t cmd_pt_list_arg1 =
+static const parse_pgm_token_string_t cmd_pt_list_arg1 =
 TOKEN_STRING_INITIALIZER(struct cmd_pt_list_result, arg1, str_pt_list_arg1);
-static parse_token_num_t cmd_pt_list_arg2 =
+static const parse_pgm_token_num_t cmd_pt_list_arg2 =
 TOKEN_NUM_INITIALIZER(struct cmd_pt_list_result, arg2, UINT16);
-static parse_token_num_t cmd_pt_list_arg3 =
+static const parse_pgm_token_num_t cmd_pt_list_arg3 =
 TOKEN_NUM_INITIALIZER(struct cmd_pt_list_result, arg3, INT16);
-static parse_token_num_t cmd_pt_list_arg4 =
+static const parse_pgm_token_num_t cmd_pt_list_arg4 =
 TOKEN_NUM_INITIALIZER(struct cmd_pt_list_result, arg4, INT16);
 
 static const prog_char help_pt_list[] = "Insert point in pt_list (idx,x,y)";
-parse_inst_t cmd_pt_list = {
+const parse_pgm_inst_t  cmd_pt_list = {
 	.f = cmd_pt_list_parsed,
 	.data = NULL,
 	.help_str = help_pt_list,
@@ -423,12 +423,12 @@ parse_inst_t cmd_pt_list = {
 /* append */
 
 static const prog_char str_pt_list_arg1_append[] = "append";
-static parse_token_string_t cmd_pt_list_arg1_append =
+static const parse_pgm_token_string_t cmd_pt_list_arg1_append =
 TOKEN_STRING_INITIALIZER(struct cmd_pt_list_result, arg1,
 			 str_pt_list_arg1_append);
 
 static const prog_char help_pt_list_append[] = "Append point in pt_list (x,y)";
-parse_inst_t cmd_pt_list_append = {
+const parse_pgm_inst_t  cmd_pt_list_append = {
 	.f = cmd_pt_list_parsed,
 	.data = NULL,
 	.help_str = help_pt_list_append,
@@ -444,11 +444,11 @@ parse_inst_t cmd_pt_list_append = {
 /* del */
 
 static const prog_char str_pt_list_del_arg[] = "del";
-static parse_token_string_t cmd_pt_list_del_arg =
+static const parse_pgm_token_string_t cmd_pt_list_del_arg =
 TOKEN_STRING_INITIALIZER(struct cmd_pt_list_result, arg1, str_pt_list_del_arg);
 
 static const prog_char help_pt_list_del[] = "Del or insert point in pt_list (num)";
-parse_inst_t cmd_pt_list_del = {
+const parse_pgm_inst_t  cmd_pt_list_del = {
 	.f = cmd_pt_list_parsed,
 	.data = NULL,
 	.help_str = help_pt_list_del,
@@ -463,11 +463,11 @@ parse_inst_t cmd_pt_list_del = {
 /* show */
 
 static const prog_char str_pt_list_show_arg[] = "show#reset#start";
-static parse_token_string_t cmd_pt_list_show_arg =
+static const parse_pgm_token_string_t cmd_pt_list_show_arg =
 TOKEN_STRING_INITIALIZER(struct cmd_pt_list_result, arg1, str_pt_list_show_arg);
 
 static const prog_char help_pt_list_show[] = "Show, start or reset pt_list";
-parse_inst_t cmd_pt_list_show = {
+const parse_pgm_inst_t  cmd_pt_list_show = {
 	.f = cmd_pt_list_parsed,
 	.data = NULL,
 	.help_str = help_pt_list_show,
@@ -507,9 +507,11 @@ static void debug_asserv(microseconds time_stamp)
 //#else
 	/* for tuning blocking detection */
 
-	printf_P(PSTR("%ld;%ld;"), mainboard.distance.bd.speed,mainboard.distance.bd.cpt);
-// ATTENTION : mainboard.distance.bd.i a été retiré car ne compile pas même pour "angle"
+	printf_P(PSTR("%ld;%ld;"), mainboard.distance.bd.speed, mainboard.distance.bd.cpt);
+
 	printf_P(PSTR("%ld;%ld;"), mainboard.angle.bd.speed, mainboard.angle.bd.cpt);
+	
+	//mainboard.angle.bd.i normalement  mais supprimé
 #endif
 	printf_P(PSTR("\n\r"));
 }
@@ -571,17 +573,17 @@ static void cmd_goto_parsed(void *parsed_result, void *data)
 }
 
 static const prog_char str_goto_arg0[] = "goto";
-static parse_token_string_t cmd_goto_arg0 =
+static const parse_pgm_token_string_t cmd_goto_arg0 =
 TOKEN_STRING_INITIALIZER(struct cmd_goto_result, arg0, str_goto_arg0);
 static const prog_char str_goto_arg1_a[] = "d_rel#a_rel#a_abs";
-static parse_token_string_t cmd_goto_arg1_a =
+static const parse_pgm_token_string_t cmd_goto_arg1_a =
 TOKEN_STRING_INITIALIZER(struct cmd_goto_result, arg1, str_goto_arg1_a);
-static parse_token_num_t cmd_goto_arg2 =
+static const parse_pgm_token_num_t cmd_goto_arg2 =
 TOKEN_NUM_INITIALIZER(struct cmd_goto_result, arg2, INT32);
 
 /* 1 params */
 static const prog_char help_goto1[] = "Change orientation of the mainboard";
-parse_inst_t cmd_goto1 = {
+const parse_pgm_inst_t  cmd_goto1 = {
 	.f = cmd_goto_parsed,
 	.data = NULL,
 	.help_str = help_goto1,
@@ -595,14 +597,14 @@ parse_inst_t cmd_goto1 = {
 
 static const prog_char str_goto_arg1_b[] =
     "xy_rel#xy_abs#xy_abs_fow#xy_abs_back#da_rel#a_to_xy#a_behind_xy";
-static parse_token_string_t cmd_goto_arg1_b =
+static const parse_pgm_token_string_t cmd_goto_arg1_b =
 TOKEN_STRING_INITIALIZER(struct cmd_goto_result, arg1, str_goto_arg1_b);
-static parse_token_num_t cmd_goto_arg3 =
+static const parse_pgm_token_num_t cmd_goto_arg3 =
 TOKEN_NUM_INITIALIZER(struct cmd_goto_result, arg3, INT32);
 
 /* 2 params */
 static const prog_char help_goto2[] = "Go to a (x,y) or (d,a) position";
-parse_inst_t cmd_goto2 = {
+const parse_pgm_inst_t  cmd_goto2 = {
 	.f = cmd_goto_parsed,
 	.data = NULL,
 	.help_str = help_goto2,
@@ -651,15 +653,15 @@ static void cmd_position_parsed(void *parsed_result, void *data)
 }
 
 static const prog_char str_position_arg0[] = "position";
-static parse_token_string_t cmd_position_arg0 =
+static const parse_pgm_token_string_t cmd_position_arg0 =
 TOKEN_STRING_INITIALIZER(struct cmd_position_result, arg0, str_position_arg0);
 static const prog_char str_position_arg1[] = "show#reset#autoset_" ROBOT_COLOR_DEFAULT_NAME \
 				       "#autoset_" ROBOT_COLOR_ALTERNATE_NAME;
-static parse_token_string_t cmd_position_arg1 =
+static const parse_pgm_token_string_t cmd_position_arg1 =
 TOKEN_STRING_INITIALIZER(struct cmd_position_result, arg1, str_position_arg1);
 
 static const prog_char help_position[] = "Show/reset (x,y,a) position";
-parse_inst_t cmd_position = {
+const parse_pgm_inst_t  cmd_position = {
 	.f = cmd_position_parsed,
 	.data = NULL,
 	.help_str = help_position,
@@ -671,18 +673,18 @@ parse_inst_t cmd_position = {
 };
 
 static const prog_char str_position_arg1_set[] = "set";
-static parse_token_string_t cmd_position_arg1_set =
+static const parse_pgm_token_string_t cmd_position_arg1_set =
 TOKEN_STRING_INITIALIZER(struct cmd_position_result, arg1,
 			 str_position_arg1_set);
-static parse_token_num_t cmd_position_arg2 =
+static const parse_pgm_token_num_t cmd_position_arg2 =
 TOKEN_NUM_INITIALIZER(struct cmd_position_result, arg2, INT32);
-static parse_token_num_t cmd_position_arg3 =
+static const parse_pgm_token_num_t cmd_position_arg3 =
 TOKEN_NUM_INITIALIZER(struct cmd_position_result, arg3, INT32);
-static parse_token_num_t cmd_position_arg4 =
+static const parse_pgm_token_num_t cmd_position_arg4 =
 TOKEN_NUM_INITIALIZER(struct cmd_position_result, arg4, INT32);
 
 static const prog_char help_position_set[] = "Set (x,y,a) position";
-parse_inst_t cmd_position_set = {
+const parse_pgm_inst_t  cmd_position_set = {
 	.f = cmd_position_parsed,
 	.data = NULL,
 	.help_str = help_position_set,
@@ -720,14 +722,14 @@ static void cmd_motion_parsed(void *parsed_result, void *data)
 }
 
 static const prog_char str_motion_arg1[] = "calibrate";
-static parse_token_string_t cmd_motion_arg1 =
+static const parse_pgm_token_string_t cmd_motion_arg1 =
 TOKEN_STRING_INITIALIZER(struct cmd_motion_result, arg1, str_motion_arg1);
 static const prog_char str_motion_arg0[] = "motion";
-static parse_token_string_t cmd_motion_arg0 =
+static const parse_pgm_token_string_t cmd_motion_arg0 =
 TOKEN_STRING_INITIALIZER(struct cmd_motion_result, arg0, str_motion_arg0);
 
 static const prog_char help_motion[] = "Calibrate motion parameters";
-parse_inst_t cmd_motion = {
+const parse_pgm_inst_t  cmd_motion = {
 	.f = cmd_motion_parsed,
 	.data = NULL,
 	.help_str = help_motion,

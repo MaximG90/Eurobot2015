@@ -263,12 +263,7 @@ static void do_battery_manager(void *dummy)
 
 /* -----------------------------------------------------------------------------
  * Boolean sensors
- *
- * sensor mapping (surment pas mis à jour, SE MEFIER) :
- * 0-3:  PORTK[2:5] (CAP[1:4], ADC[10:13])  (Exemple : capteur lift : Cap1=>PK2
- * 4-5:  PORTL[4:5] (CAP[5:6])
- * 6-7:  PORTE[3:4] (CAP[7:8])
- * 8-15: reserved for remote sensors
+ * -----------------------------------------------------------------------------
  */
 
 struct sensor_filter {
@@ -294,6 +289,7 @@ struct sensor_filter {
  */
 static struct sensor_filter sensor_filter[SENSOR_MAX] = {
 	DECLARE_SENSOR_FILTER_INVERT(S_START_SWITCH, 10, 3, 7),
+	DECLARE_SENSOR_FILTER_INVERT(S_START_SWITCH_2, 10, 3, 7),
 	DECLARE_SENSOR_INVERT(S_START_COLOR),
 	DECLARE_SENSOR_INVERT(S_AUTO_POS),
 	DECLARE_SENSOR(S_LIFT),
@@ -326,17 +322,15 @@ uint8_t sensor_get(uint8_t i)
 
 static uint16_t sensor_read(void)
 {
-  /* Arduino Max : 
-  * CAP: 1	2	6	9	10
-  * 	PK2	PK3	PL1	PL4	PL3
+  /* Arduino MaxG : 
+  * CAP[1-5] : PK[0-4] : Pin[A8-A12]
+  * CAP[6,7,x,9,10] : PL[0,1,x,3,4] : Pin[49,48,x,46,45]
   */
 	uint16_t sensors;
 
-	sensors  = (uint16_t)((PINK & (_BV(2) | _BV(3) | _BV(4) | _BV(5))) >> 2); // 2-3
-	sensors |= (uint16_t)((PINL & (_BV(0) | _BV(1))) << 4); // 1
-	sensors |= (uint16_t)(((PINE & (_BV(3) | _BV(4))) >> 3) << 6); // Useless
-	sensors |= (uint16_t)(((PINL & (_BV(4) | _BV(3))) >> 4) << 8); // 3-4
-
+	sensors  = (uint16_t)((PINK & (_BV(0) | _BV(1) | _BV(2) | _BV(3) | _BV(4)))); // x - x - 2 - 3 - x
+	sensors |= (uint16_t)((PINL & (_BV(0) | _BV(1) | _BV(2) | _BV(3) | _BV(4))) << 5); // 0 - 1 - LED - 3 - 4
+	//printf("Sensors %d \n\r", sensors);
 	return sensors;
 }
 
@@ -403,8 +397,7 @@ static void do_ir(void)
 	if (toggle & 0x1) {
 		ir_enable_transmitters();
 	} else {
-		if ((PINL & _BV(0)) == 0)
-			ir_ok++;
+		ir_ok++;
 		ir_disable_transmitters();
 	}
 	toggle++;
@@ -443,8 +436,8 @@ static void do_sensors(void *dummy)
 void sensor_init(void)
 {
 	/* Activate internal pull-ups on CAP 1-10 */
-	PORTK |= _BV(2) | _BV(3) ; // 2 capteurs de proximite
-	PORTL |= _BV(1) | _BV(3) | _BV(4); // Depart - Calibration - Choix camp
+	PORTK |= _BV(0) | _BV(1) | _BV(2) | _BV(3) | _BV(4); 	// 0 - 0 - 2 capteurs de proximite - 0
+	PORTL |= _BV(0) | _BV(1) | _BV(3) | _BV(4); 		// Depart 1 - Depart 2 - Calibration - Choix camp
 	
 
 	//adc_init();

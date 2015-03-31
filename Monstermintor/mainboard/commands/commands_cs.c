@@ -42,7 +42,7 @@
 #include "cmdline.h"
 
 struct csb_list {
-	const const prog_char *name;
+	const prog_char *name;
 	struct cs_block *csb;
 };
 
@@ -63,9 +63,11 @@ struct cmd_csb_show_result {
 	fixed_string_t show;
 };
 
+
+
 /* token to be used for all cs-related commands */
 static const prog_char str_csb_name[] = "angle#distance";
-static parse_token_string_t cmd_csb_name_tok =
+static const parse_pgm_token_string_t cmd_csb_name_tok =
 TOKEN_STRING_INITIALIZER(struct cmd_cs_result, csname, str_csb_name);
 
 static struct cs_block *cs_from_name(const char *name)
@@ -118,17 +120,17 @@ static void cmd_gain_parsed(void *parsed_result, void *show)
 }
 
 static const prog_char str_gain_arg0[] = "gain";
-static parse_token_string_t cmd_gain_arg0 =
+static const parse_pgm_token_string_t cmd_gain_arg0 =
 TOKEN_STRING_INITIALIZER(struct cmd_gain_result, cs.cmdname, str_gain_arg0);
-static parse_token_num_t cmd_gain_p =
+static const parse_pgm_token_num_t cmd_gain_p =
 TOKEN_NUM_INITIALIZER(struct cmd_gain_result, p, INT16);
-static parse_token_num_t cmd_gain_i =
+static const parse_pgm_token_num_t cmd_gain_i =
 TOKEN_NUM_INITIALIZER(struct cmd_gain_result, i, INT16);
-static parse_token_num_t cmd_gain_d =
+static const parse_pgm_token_num_t cmd_gain_d =
 TOKEN_NUM_INITIALIZER(struct cmd_gain_result, d, INT16);
 
 static const prog_char help_gain[] = "Set gain values for PID";
-parse_inst_t cmd_gain = {
+const parse_pgm_inst_t  cmd_gain = {
 	.f = cmd_gain_parsed,
 	.data = NULL,
 	.help_str = help_gain,
@@ -143,11 +145,11 @@ parse_inst_t cmd_gain = {
 };
 
 static const prog_char str_gain_show_arg[] = "show";
-static parse_token_string_t cmd_gain_show_arg =
+static const parse_pgm_token_string_t cmd_gain_show_arg =
 TOKEN_STRING_INITIALIZER(struct cmd_csb_show_result, show, str_gain_show_arg);
 
 static const prog_char help_gain_show[] = "Show gain values for PID";
-parse_inst_t cmd_gain_show = {
+const parse_pgm_inst_t  cmd_gain_show = {
 	.f = cmd_gain_parsed,
 	.data = (void *)1,
 	.help_str = help_gain_show,
@@ -195,13 +197,13 @@ static void cmd_speed_parsed(void *parsed_result, void *show)
 }
 
 static const prog_char str_speed_arg0[] = "speed";
-static parse_token_string_t cmd_speed_arg0 =
+static const parse_pgm_token_string_t cmd_speed_arg0 =
 TOKEN_STRING_INITIALIZER(struct cmd_speed_result, cs.cmdname, str_speed_arg0);
-static parse_token_num_t cmd_speed_s =
+static const parse_pgm_token_num_t cmd_speed_s =
 TOKEN_NUM_INITIALIZER(struct cmd_speed_result, s, UINT16);
 
 static const prog_char help_speed[] = "Set speed values for ramp filter";
-parse_inst_t cmd_speed = {
+const parse_pgm_inst_t  cmd_speed = {
 	.f = cmd_speed_parsed,
 	.data = NULL,
 	.help_str = help_speed,
@@ -214,12 +216,12 @@ parse_inst_t cmd_speed = {
 };
 
 static const prog_char str_speed_show_arg[] = "show";
-static parse_token_string_t cmd_speed_show_arg =
+static const parse_pgm_token_string_t cmd_speed_show_arg =
 TOKEN_STRING_INITIALIZER(struct cmd_csb_show_result, show,
 			 str_speed_show_arg);
 
 static const prog_char help_speed_show[] = "Show speed values for ramp filter";
-parse_inst_t cmd_speed_show = {
+const parse_pgm_inst_t  cmd_speed_show = {
 	.f = cmd_speed_parsed,
 	.data = (void *)1,
 	.help_str = help_speed_show,
@@ -265,15 +267,15 @@ static void cmd_derivate_filter_parsed(void *parsed_result, void *show)
 }
 
 static const prog_char str_derivate_filter_arg0[] = "derivate_filter";
-static parse_token_string_t cmd_derivate_filter_arg0 =
+static const parse_pgm_token_string_t cmd_derivate_filter_arg0 =
 TOKEN_STRING_INITIALIZER(struct cmd_derivate_filter_result, cs.cmdname,
 			 str_derivate_filter_arg0);
-static parse_token_num_t cmd_derivate_filter_size =
+static const parse_pgm_token_num_t cmd_derivate_filter_size =
 TOKEN_NUM_INITIALIZER(struct cmd_derivate_filter_result, size, UINT32);
 
 static const prog_char help_derivate_filter[] =
     "Set derivate_filter values for PID (size)";
-parse_inst_t cmd_derivate_filter = {
+const parse_pgm_inst_t  cmd_derivate_filter = {
 	.f = cmd_derivate_filter_parsed,
 	.data = (void *)1,
 	.help_str = help_derivate_filter,
@@ -286,12 +288,12 @@ parse_inst_t cmd_derivate_filter = {
 };
 
 static const prog_char str_derivate_filter_show_arg[] = "show";
-static parse_token_string_t cmd_derivate_filter_show_arg =
+static const parse_pgm_token_string_t cmd_derivate_filter_show_arg =
 TOKEN_STRING_INITIALIZER(struct cmd_csb_show_result, show,
 			 str_derivate_filter_show_arg);
 
 static const prog_char help_derivate_filter_show[] = "Show derivate_filter values for PID";
-parse_inst_t cmd_derivate_filter_show = {
+const parse_pgm_inst_t  cmd_derivate_filter_show = {
 	.f = cmd_derivate_filter_parsed,
 	.data = NULL,
 	.help_str = help_derivate_filter_show,
@@ -331,14 +333,14 @@ static void cmd_consign_parsed(void *parsed_result, void *data)
 }
 
 static const prog_char str_consign_arg0[] = "consign";
-static parse_token_string_t cmd_consign_arg0 =
+static const parse_pgm_token_string_t cmd_consign_arg0 =
 TOKEN_STRING_INITIALIZER(struct cmd_consign_result, cs.cmdname,
 			 str_consign_arg0);
-static parse_token_num_t cmd_consign_p =
+static const parse_pgm_token_num_t cmd_consign_p =
 TOKEN_NUM_INITIALIZER(struct cmd_consign_result, p, INT32);
 
 static const prog_char help_consign[] = "Set consign value";
-parse_inst_t cmd_consign = {
+const parse_pgm_inst_t  cmd_consign = {
 	.f = cmd_consign_parsed,
 	.data = NULL,
 	.help_str = help_consign,
@@ -387,18 +389,18 @@ static void cmd_maximum_parsed(void *parsed_result, void *show)
 }
 
 static const prog_char str_maximum_arg0[] = "maximum";
-static parse_token_string_t cmd_maximum_arg0 =
+static const parse_pgm_token_string_t cmd_maximum_arg0 =
 TOKEN_STRING_INITIALIZER(struct cmd_maximum_result, cs.cmdname,
 			 str_maximum_arg0);
-static parse_token_num_t cmd_maximum_in =
+static const parse_pgm_token_num_t cmd_maximum_in =
 TOKEN_NUM_INITIALIZER(struct cmd_maximum_result, in, UINT32);
-static parse_token_num_t cmd_maximum_i =
+static const parse_pgm_token_num_t cmd_maximum_i =
 TOKEN_NUM_INITIALIZER(struct cmd_maximum_result, i, UINT32);
-static parse_token_num_t cmd_maximum_out =
+static const parse_pgm_token_num_t cmd_maximum_out =
 TOKEN_NUM_INITIALIZER(struct cmd_maximum_result, out, UINT32);
 
 static const prog_char help_maximum[] = "Set maximum values for PID (in, I, out)";
-parse_inst_t cmd_maximum = {
+const parse_pgm_inst_t  cmd_maximum = {
 	.f = cmd_maximum_parsed,
 	.data = NULL,
 	.help_str = help_maximum,
@@ -413,12 +415,12 @@ parse_inst_t cmd_maximum = {
 };
 
 static const prog_char str_maximum_show_arg[] = "show";
-static parse_token_string_t cmd_maximum_show_arg =
+static const parse_pgm_token_string_t cmd_maximum_show_arg =
 TOKEN_STRING_INITIALIZER(struct cmd_csb_show_result, show,
 			 str_maximum_show_arg);
 
 static const prog_char help_maximum_show[] = "Show maximum values for PID";
-parse_inst_t cmd_maximum_show = {
+const parse_pgm_inst_t  cmd_maximum_show = {
 	.f = cmd_maximum_parsed,
 	.data = (void *)1,
 	.help_str = help_maximum_show,
@@ -471,20 +473,20 @@ static void cmd_quadramp_parsed(void *parsed_result, void *show)
 }
 
 static const prog_char str_quadramp_arg0[] = "quadramp";
-static parse_token_string_t cmd_quadramp_arg0 =
+static const parse_pgm_token_string_t cmd_quadramp_arg0 =
 TOKEN_STRING_INITIALIZER(struct cmd_quadramp_result, cs.cmdname,
 			 str_quadramp_arg0);
-static parse_token_num_t cmd_quadramp_ap =
+static const parse_pgm_token_num_t cmd_quadramp_ap =
 TOKEN_NUM_INITIALIZER(struct cmd_quadramp_result, ap, UINT32);
-static parse_token_num_t cmd_quadramp_an =
+static const parse_pgm_token_num_t cmd_quadramp_an =
 TOKEN_NUM_INITIALIZER(struct cmd_quadramp_result, an, UINT32);
-static parse_token_num_t cmd_quadramp_sp =
+static const parse_pgm_token_num_t cmd_quadramp_sp =
 TOKEN_NUM_INITIALIZER(struct cmd_quadramp_result, sp, UINT32);
-static parse_token_num_t cmd_quadramp_sn =
+static const parse_pgm_token_num_t cmd_quadramp_sn =
 TOKEN_NUM_INITIALIZER(struct cmd_quadramp_result, sn, UINT32);
 
 static const prog_char help_quadramp[] = "Set quadramp values (acc+, acc-, speed+, speed-)";
-parse_inst_t cmd_quadramp = {
+const parse_pgm_inst_t  cmd_quadramp = {
 	.f = cmd_quadramp_parsed,
 	.data = NULL,
 	.help_str = help_quadramp,
@@ -500,12 +502,12 @@ parse_inst_t cmd_quadramp = {
 };
 
 static const prog_char str_quadramp_show_arg[] = "show";
-static parse_token_string_t cmd_quadramp_show_arg =
+static const parse_pgm_token_string_t cmd_quadramp_show_arg =
 TOKEN_STRING_INITIALIZER(struct cmd_csb_show_result, show,
 			 str_quadramp_show_arg);
 
 static const prog_char help_quadramp_show[] = "Get quadramp values for control system";
-parse_inst_t cmd_quadramp_show = {
+const parse_pgm_inst_t  cmd_quadramp_show = {
 	.f = cmd_quadramp_parsed,
 	.data = (void *)1,
 	.help_str = help_quadramp_show,
@@ -584,15 +586,15 @@ static void cmd_cs_status_parsed(void *parsed_result, void *data)
 }
 
 static const prog_char str_cs_status_arg0[] = "cs_status";
-static parse_token_string_t cmd_cs_status_arg0 =
+static const parse_pgm_token_string_t cmd_cs_status_arg0 =
 TOKEN_STRING_INITIALIZER(struct cmd_cs_status_result, cs.cmdname,
 			 str_cs_status_arg0);
 static const prog_char str_cs_status_arg[] = "pid_show#pid_loop_show#show#loop_show#on#off";
-static parse_token_string_t cmd_cs_status_arg =
+static const parse_pgm_token_string_t cmd_cs_status_arg =
 TOKEN_STRING_INITIALIZER(struct cmd_cs_status_result, arg, str_cs_status_arg);
 
 static const prog_char help_cs_status[] = "Show cs status";
-parse_inst_t cmd_cs_status = {
+const parse_pgm_inst_t  cmd_cs_status = {
 	.f = cmd_cs_status_parsed,
 	.data = NULL,
 	.help_str = help_cs_status,
@@ -644,20 +646,20 @@ static void cmd_blocking_i_parsed(void *parsed_result, void *show)
 }
 
 static const prog_char str_blocking_i_arg0[] = "blocking";
-static parse_token_string_t cmd_blocking_i_arg0 =
+static const parse_pgm_token_string_t cmd_blocking_i_arg0 =
 TOKEN_STRING_INITIALIZER(struct cmd_blocking_i_result, cs.cmdname,
 			 str_blocking_i_arg0);
-static parse_token_num_t cmd_blocking_i_k1 =
+static const parse_pgm_token_num_t cmd_blocking_i_k1 =
 TOKEN_NUM_INITIALIZER(struct cmd_blocking_i_result, k1, INT32);
-static parse_token_num_t cmd_blocking_i_k2 =
+static const parse_pgm_token_num_t cmd_blocking_i_k2 =
 TOKEN_NUM_INITIALIZER(struct cmd_blocking_i_result, k2, INT32);
-static parse_token_num_t cmd_blocking_i_i =
+static const parse_pgm_token_num_t cmd_blocking_i_i =
 TOKEN_NUM_INITIALIZER(struct cmd_blocking_i_result, i, UINT32);
-static parse_token_num_t cmd_blocking_i_cpt =
+static const parse_pgm_token_num_t cmd_blocking_i_cpt =
 TOKEN_NUM_INITIALIZER(struct cmd_blocking_i_result, cpt, UINT16);
 
 static const prog_char help_blocking_i[] = "Set blocking detection values (k1, k2, i, cpt)";
-parse_inst_t cmd_blocking_i = {
+const parse_pgm_inst_t  cmd_blocking_i = {
 	.f = cmd_blocking_i_parsed,
 	.data = NULL,
 	.help_str = help_blocking_i,
@@ -673,12 +675,12 @@ parse_inst_t cmd_blocking_i = {
 };
 
 static const prog_char str_blocking_i_show_arg[] = "show";
-static parse_token_string_t cmd_blocking_i_show_arg =
+static const parse_pgm_token_string_t cmd_blocking_i_show_arg =
 TOKEN_STRING_INITIALIZER(struct cmd_csb_show_result, show,
 			 str_blocking_i_show_arg);
 
 static const prog_char help_blocking_i_show[] = "Show blocking detection values";
-parse_inst_t cmd_blocking_i_show = {
+const parse_pgm_inst_t  cmd_blocking_i_show = {
 	.f = cmd_blocking_i_parsed,
 	.data = (void *)1,
 	.help_str = help_blocking_i_show,

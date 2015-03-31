@@ -35,7 +35,7 @@
 #include "sensor.h"
 
 /******** See in commands.c for the list of commands. */
-extern parse_ctx_t main_ctx[];
+extern parse_pgm_ctx_t const main_ctx[];
 
 static void write_char(char c)
 {

@@ -41,7 +41,7 @@ int main(void)
   
 	// init uart
 	uart_init();
-	fdevopen(uart0_send,NULL, 0);
+	fdevopen(uart0_dev_send, NULL, 0);
 
   
   

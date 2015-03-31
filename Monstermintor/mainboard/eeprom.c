@@ -39,7 +39,6 @@ void eeprom_read_config(void)
 	 //if(magic != EEPROM_MAGIC) {
 		/* If the magic value isn't present, set default parameters. */
 		//printf_P(PSTR("eprom: invalid magic value, using defaults\r\n"));
-		//printf("eprom: invalid magic value, using defaults\n");
 		config.encoders.track_mm = ENC_TRACK_MM;
 		config.encoders.pulses_per_mm = ENC_PULSE_PER_MM;
 		config.encoders.left_gain = ENC_PULSE_GAIN_LEFT;

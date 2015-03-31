@@ -57,16 +57,16 @@ static void cmd_strat_info_parsed(void *parsed_result, void *data)
 }
 
 static const prog_char str_strat_info_arg0[] = "strat_info";
-static parse_token_string_t cmd_strat_info_arg0 =
+static const parse_pgm_token_string_t cmd_strat_info_arg0 =
 TOKEN_STRING_INITIALIZER(struct cmd_strat_info_result, arg0,
 			 str_strat_info_arg0);
 static const prog_char str_strat_info_arg1[] = "show#reset";
-static parse_token_string_t cmd_strat_info_arg1 =
+static const parse_pgm_token_string_t cmd_strat_info_arg1 =
 TOKEN_STRING_INITIALIZER(struct cmd_strat_info_result, arg1,
 			 str_strat_info_arg1);
 
 static const prog_char help_strat_info[] = "reset/show strat_info";
-parse_inst_t cmd_strat_info = {
+const parse_pgm_inst_t  cmd_strat_info = {
 	.f = cmd_strat_info_parsed,
 	.data = NULL,
 	.help_str = help_strat_info,
@@ -146,17 +146,17 @@ static void cmd_strat_conf_parsed(void *parsed_result, void *data)
 }
 
 static const prog_char str_strat_conf_arg0[] = "strat_conf";
-static parse_token_string_t cmd_strat_conf_arg0 =
+static const parse_pgm_token_string_t cmd_strat_conf_arg0 =
 TOKEN_STRING_INITIALIZER(struct cmd_strat_conf_result, arg0,
 			 str_strat_conf_arg0);
 static const prog_char str_strat_conf_arg1[] =
     "show#base#big3#base_check#big3_check#offensive_early#offensive_late#one_on_disc";
-static parse_token_string_t cmd_strat_conf_arg1 =
+static const parse_pgm_token_string_t cmd_strat_conf_arg1 =
 TOKEN_STRING_INITIALIZER(struct cmd_strat_conf_result, arg1,
 			 str_strat_conf_arg1);
 
 static const prog_char help_strat_conf[] = "configure strat options";
-parse_inst_t cmd_strat_conf = {
+const parse_pgm_inst_t  cmd_strat_conf = {
 	.f = cmd_strat_conf_parsed,
 	.data = NULL,
 	.help_str = help_strat_conf,
@@ -214,21 +214,21 @@ static void cmd_strat_conf2_parsed(void *parsed_result, void *data)
 }
 
 static const prog_char str_strat_conf2_arg0[] = "strat_conf";
-static parse_token_string_t cmd_strat_conf2_arg0 =
+static const parse_pgm_token_string_t cmd_strat_conf2_arg0 =
 TOKEN_STRING_INITIALIZER(struct cmd_strat_conf2_result, arg0,
 			 str_strat_conf2_arg0);
 static const prog_char str_strat_conf2_arg1[] =
     "push_opp_cols#one_temple_on_disc#bypass_static2#take_one_lintel#skip_when_check_fail#store_static2#big3_temple#early_opp_scan";
-static parse_token_string_t cmd_strat_conf2_arg1 =
+static const parse_pgm_token_string_t cmd_strat_conf2_arg1 =
 TOKEN_STRING_INITIALIZER(struct cmd_strat_conf2_result, arg1,
 			 str_strat_conf2_arg1);
 static const prog_char str_strat_conf2_arg2[] = "on#off";
-static parse_token_string_t cmd_strat_conf2_arg2 =
+static const parse_pgm_token_string_t cmd_strat_conf2_arg2 =
 TOKEN_STRING_INITIALIZER(struct cmd_strat_conf2_result, arg2,
 			 str_strat_conf2_arg2);
 
 static const prog_char help_strat_conf2[] = "configure strat options";
-parse_inst_t cmd_strat_conf2 = {
+const parse_pgm_inst_t  cmd_strat_conf2 = {
 	.f = cmd_strat_conf2_parsed,
 	.data = NULL,
 	.help_str = help_strat_conf2,
@@ -268,19 +268,19 @@ static void cmd_strat_conf3_parsed(void *parsed_result, void *data)
 }
 
 static const prog_char str_strat_conf3_arg0[] = "strat_conf";
-static parse_token_string_t cmd_strat_conf3_arg0 =
+static const parse_pgm_token_string_t cmd_strat_conf3_arg0 =
 TOKEN_STRING_INITIALIZER(struct cmd_strat_conf3_result, arg0,
 			 str_strat_conf3_arg0);
 static const prog_char str_strat_conf3_arg1[] =
     "scan_our_min_time#delay_between_our_scan";
-static parse_token_string_t cmd_strat_conf3_arg1 =
+static const parse_pgm_token_string_t cmd_strat_conf3_arg1 =
 TOKEN_STRING_INITIALIZER(struct cmd_strat_conf3_result, arg1,
 			 str_strat_conf3_arg1);
-static parse_token_num_t cmd_strat_conf3_arg2 =
+static const parse_pgm_token_num_t cmd_strat_conf3_arg2 =
 TOKEN_NUM_INITIALIZER(struct cmd_strat_conf3_result, arg2, UINT16);
 
 static const prog_char help_strat_conf3[] = "configure strat options";
-parse_inst_t cmd_strat_conf3 = {
+const parse_pgm_inst_t  cmd_strat_conf3 = {
 	.f = cmd_strat_conf3_parsed,
 	.data = NULL,
 	.help_str = help_strat_conf3,
@@ -342,15 +342,15 @@ static void cmd_subtraj_parsed(void *parsed_result, void *data)
 }
 
 static const prog_char str_subtraj_arg0[] = "subtraj";
-static parse_token_string_t cmd_subtraj_arg0 =
+static const parse_pgm_token_string_t cmd_subtraj_arg0 =
 TOKEN_STRING_INITIALIZER(struct cmd_subtraj_result, arg0, str_subtraj_arg0);
 static const prog_char str_subtraj_arg1[] =
     "diag3#diag5#diag6d#diag6o#diag7d#diag7o";
-static parse_token_string_t cmd_subtraj_arg1 =
+static const parse_pgm_token_string_t cmd_subtraj_arg1 =
 TOKEN_STRING_INITIALIZER(struct cmd_subtraj_result, arg1, str_subtraj_arg1);
 
 static const prog_char help_subtraj[] = "Test sub-trajectories";
-parse_inst_t cmd_subtraj = {
+const parse_pgm_inst_t  cmd_subtraj = {
 	.f = cmd_subtraj_parsed,
 	.data = NULL,
 	.help_str = help_subtraj,

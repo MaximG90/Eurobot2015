@@ -24,6 +24,8 @@
 #ifndef _VT100_H_
 #define _VT100_H_
 
+#include <aversive/pgmspace.h>
+
 #define vt100_bell         "\007"
 #define vt100_bs           "\010"
 #define vt100_bs_clear     "\010 \010"

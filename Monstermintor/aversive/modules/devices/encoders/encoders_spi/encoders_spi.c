@@ -36,70 +36,47 @@
 #include <encoders_spi.h>
 #include <encoders_spi_config.h>
 
-
-#include "../../../../../Arduino.h"
-
-
-static int32_t  g_encoders_spi_values[ENCODERS_SPI_NUMBER];
-/* static  */int32_t g_encoders_spi_previous[ENCODERS_SPI_NUMBER];
+static int32_t g_encoders_spi_values[ENCODERS_SPI_NUMBER];
+/* static  */int16_t g_encoders_spi_previous[ENCODERS_SPI_NUMBER];
 
 
 /* Initialisation of encoders, variables */
 void encoders_spi_init(void)
 {
-  init();   // initialisation timer arduino si on utilise la fonction delay();
-  // Initialisation
-    
-   DDRA = B00000000;   // sets Arduino Mega (ATMEL ATMEGA) Digital pins 22(PORTA0) to 29(PORTA7) as inputs from HCTL-2032 - D0 to D7
-    
-   pinMode(XY,   OUTPUT);
-   pinMode(OE,   OUTPUT);
-   pinMode(EN1,  OUTPUT);
-   pinMode(EN2,  OUTPUT);
-   pinMode(SEL1, OUTPUT);
-   pinMode(SEL2, OUTPUT);
-   pinMode(RSTX, OUTPUT);
-   pinMode(RSTY, OUTPUT);
-   
-   // Communicates with a HCTL-2032 IC to set the count mode
-   // see Avago/Agilent/HP HCTL-2032 PDF for details
-   // Uniquement le mode 4x car les autres modes offrent une précision moindre (useless)
-   digitalWrite(EN1, HIGH);
-   digitalWrite(EN2, LOW);
-   
-   // A vérifier (voir datasheet) : 
-   digitalWrite(XY, LOW);
-   digitalWrite(OE, HIGH); // A quoi sert OE ?
-   digitalWrite(SEL1, LOW);
-   digitalWrite(SEL2, HIGH);
-
-   
-   // Reset encoder 1
-   digitalWrite(RSTX, LOW);
-   delayMicroseconds(1);
-   digitalWrite(RSTX, HIGH);
-   delayMicroseconds(1);
-   // Reset encodeur 2
-   digitalWrite(RSTY, LOW);
-   delayMicroseconds(1);
-   digitalWrite(RSTY, HIGH);
-   delayMicroseconds(1);
-   
-   // Fin Initialisation
-   
-   
 	memset(g_encoders_spi_previous, 0, sizeof(g_encoders_spi_previous));
+	spi_register_ss_line(&ENCODERS_SPI_SS_PORT, ENCODERS_SPI_SS_BIT);
+	spi_init(SPI_MODE_MASTER, ENCODERS_SPI_FORMAT, ENCODERS_SPI_CLK_RATE);
+	spi_set_data_order(ENCODERS_SPI_DATA_ORDER);
 	encoders_spi_manage(NULL);
 	memset(g_encoders_spi_values, 0, sizeof(g_encoders_spi_values));
-
 }
 
 
 /* Update encoders values */
 void encoders_spi_manage(__attribute__((unused)) void *dummy)
 {
- // YOLO
+	union {
+		struct {
+			uint8_t u8_lsb;
+			uint8_t u8_msb;
+		} s;
+		int16_t s16;
+	} enc;
+	uint8_t i;
+	int16_t diff;
+	uint8_t flags;
 
+	spi_slave_select(0);
+	for (i=0; i<ENCODERS_SPI_NUMBER; i++) {
+		enc.s.u8_lsb = spi_receive_byte();
+		enc.s.u8_msb = spi_receive_byte();
+		diff = enc.s16 - g_encoders_spi_previous[i];
+		g_encoders_spi_previous[i] = enc.s16;
+		IRQ_LOCK(flags);
+		g_encoders_spi_values[i] += diff;
+		IRQ_UNLOCK(flags);
+	}
+	spi_slave_deselect(0);
 }
 
 
@@ -109,54 +86,11 @@ int32_t encoders_spi_get_value(void *encoder)
 {
 	int32_t value;
 	uint8_t flags;
-	int32_t busByte;
-	int32_t count;
-	int32_t diff;
-
-
-   digitalWrite(XY,   LOW); // Selection de l'encodeur 1 ou 2 (ici : 1)
-   digitalWrite(OE,   LOW); // Début lécture ??
-   digitalWrite(SEL1, LOW);
-   digitalWrite(SEL2, HIGH); // Pour lecture octet poid faible
-
-   delayMicroseconds(1);
-   busByte = PINA;
-   count   = busByte;
-   count <<= 8;
-
-   digitalWrite(SEL1, HIGH);
-   digitalWrite(SEL2, HIGH);
-   delayMicroseconds(1);
-   busByte = PINA;
-   count  += busByte;
-   count <<= 8;
-
-   digitalWrite(SEL1, LOW);
-   digitalWrite(SEL2, LOW);
-   delayMicroseconds(1);
-   busByte = PINA;
-   count  += busByte;
-   count <<= 8;
-
-   digitalWrite(SEL1, HIGH);
-   digitalWrite(SEL2, LOW);
-   delayMicroseconds(1);
-   busByte = PINA;
-   count  += busByte;
-   
-   digitalWrite(OE,  HIGH); // Fin de lécture ??
-       
-
-   diff = count - g_encoders_spi_previous[0];
-   g_encoders_spi_previous[0] = count;
-   IRQ_LOCK(flags);
-   g_encoders_spi_values[0] += diff;
-   IRQ_UNLOCK(flags);
-		
 
 	IRQ_LOCK(flags);
 	value = g_encoders_spi_values[(int)encoder];
 	IRQ_UNLOCK(flags);
+
 	return value;
 }
 

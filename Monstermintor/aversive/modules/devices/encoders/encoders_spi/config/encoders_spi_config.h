@@ -21,7 +21,13 @@
 #ifndef _ENCODERS_SPI_CONFIG_H_
 #define _ENCODERS_SPI_CONFIG_H_
 
-#define ENCODERS_SPI_NUMBER 4 // 4 prc monstavr a 4 encodeur? Es-ce header utile??
+#define ENCODERS_SPI_NUMBER 4
+#define ENCODERS_SPI_SS_PORT SS_PORT
+#define ENCODERS_SPI_SS_BIT  SS_BIT
 
+/* see spi configuration */
+#define ENCODERS_SPI_CLK_RATE     SPI_CLK_RATE_16
+#define ENCODERS_SPI_FORMAT       SPI_FORMAT_3
+#define ENCODERS_SPI_DATA_ORDER   SPI_LSB_FIRST
 
 #endif

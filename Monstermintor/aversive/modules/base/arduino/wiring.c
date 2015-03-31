@@ -22,6 +22,8 @@
   $Id$
 */
 #include "wiring_private.h"
+#include <timer_intr.h>
+
 // the prescaler is set so that timer0 ticks every 64 clock cycles, and the
 // the overflow handler is called every 256 ticks.
 #define MICROSECONDS_PER_TIMER0_OVERFLOW (clockCyclesToMicroseconds(64 * 256))
@@ -40,7 +42,7 @@ volatile unsigned long timer0_millis = 0;
 static unsigned char timer0_fract = 0;
 
 
-/*ISR(TIMER0_OVF_vect)
+ISR(TIMER0_OVF_vect)
 {
 	// copy these to local variables so they can be stored in registers
 	// (volatile variables must be read from memory on every access)
@@ -57,7 +59,13 @@ static unsigned char timer0_fract = 0;
 	timer0_fract = f;
 	timer0_millis = m;
 	timer0_overflow_count++;
-}*/
+	
+	// Pour Aversive
+	if(timer_callback_table[TIMER0_OVF_vect_num])            
+		timer_callback_table[TIMER0_OVF_vect_num]();     
+
+}
+
 
 unsigned long millis()
 {
@@ -283,4 +291,6 @@ void init()
 	// enable a2d conversions
 	sbi(ADCSRA, ADEN);
 #endif
+
+
 }

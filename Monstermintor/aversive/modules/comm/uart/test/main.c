@@ -76,7 +76,7 @@ int main(void)
 
 #ifndef HOST_VERSION
 	/* now we want to do a printf : we must register the
-	 * uart0_send as stdout. Here no receive function is
+	 * uart0_dev_send as stdout. Here no receive function is
 	 * specified. */
 	fdevopen(uart0_dev_send, NULL);
 #endif

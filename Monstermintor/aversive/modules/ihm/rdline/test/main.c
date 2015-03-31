@@ -103,7 +103,7 @@ write_char(char c) {
 #else
 void
 write_char(char c) {
-	uart0_send(c);
+	uart_send(0, c);
 }
 
 static void
@@ -139,9 +139,8 @@ const char * dummy_complete[] = {
 
 #define TEST_COMPLETION 1
 //#define TEST_COMPLETION 2
-int8_t complete_buffer(const char * buf, uint8_t size, 
-		     char * dstbuf, uint8_t dstsize,
-		     int * state)
+int8_t complete_buffer(const char *buf, char *dstbuf,
+	uint8_t dstsize, int *state)
 {
 	sock_printf("complete -> %d\n", *state);
 #if TEST_COMPLETION == 1
@@ -206,7 +205,7 @@ int main(void)
 
 	wait_ms(5000);
 	printf("Start\n");
-	uart0_register_rx_event(rx);
+	uart_register_rx_event(0, rx);
 	
 	sei();
 #endif

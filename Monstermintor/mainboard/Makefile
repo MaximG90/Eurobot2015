@@ -29,7 +29,6 @@ ASRC =
 
 CFLAGS += -I./config
 CFLAGS += -Wall -DHOST_AVR
-CFLAGS += -g -mmcu=$(MCU) -Wall -Wstrict-prototypes -Os -mcall-prologues -Wno-deprecated-declarations -D__PROG_TYPES_COMPAT__
 #CFLAGS += -Werror
 #CFLAGS += -DHOMOLOGATION
 

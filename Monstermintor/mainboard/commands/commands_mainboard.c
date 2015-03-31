@@ -135,17 +135,17 @@ static void cmd_event_parsed(void *parsed_result, void *data)
 }
 
 static const prog_char str_event_arg0[] = "event";
-static parse_token_string_t cmd_event_arg0 =
+static const parse_pgm_token_string_t cmd_event_arg0 =
 TOKEN_STRING_INITIALIZER(struct cmd_event_result, arg0, str_event_arg0);
 static const prog_char str_event_arg1[] = "all#encoders#cs#rs#pos#bd#timer#power";
-static parse_token_string_t cmd_event_arg1 =
+static const parse_pgm_token_string_t cmd_event_arg1 =
 TOKEN_STRING_INITIALIZER(struct cmd_event_result, arg1, str_event_arg1);
 static const prog_char str_event_arg2[] = "on#off#show";
-static parse_token_string_t cmd_event_arg2 =
+static const parse_pgm_token_string_t cmd_event_arg2 =
 TOKEN_STRING_INITIALIZER(struct cmd_event_result, arg2, str_event_arg2);
 
 static const prog_char help_event[] = "Enable/disable events";
-parse_inst_t cmd_event = {
+const parse_pgm_inst_t  cmd_event = {
 	.f = cmd_event_parsed,
 	.data = NULL,
 	.help_str = help_event,
@@ -195,11 +195,11 @@ static void cmd_spi_test_parsed(void *parsed_result, void *data)
 }
 
 static const prog_char str_spi_test_arg0[] = "spi_test";
-static parse_token_string_t cmd_spi_test_arg0 =
+static const parse_pgm_token_string_t cmd_spi_test_arg0 =
 TOKEN_STRING_INITIALIZER(struct cmd_spi_test_result, arg0, str_spi_test_arg0);
 
 static const prog_char help_spi_test[] = "Test the SPI";
-parse_inst_t cmd_spi_test = {
+const parse_pgm_inst_t  cmd_spi_test = {
 	.f = cmd_spi_test_parsed,
 	.data = NULL,
 	.help_str = help_spi_test,
@@ -252,19 +252,19 @@ static void cmd_start_parsed(void *parsed_result, void *data)
 }
 
 static const prog_char str_start_arg0[] = "start";
-static parse_token_string_t cmd_start_arg0 =
+static const parse_pgm_token_string_t cmd_start_arg0 =
 TOKEN_STRING_INITIALIZER(struct cmd_start_result, arg0, str_start_arg0);
 static const prog_char str_start_color[] = ROBOT_COLOR_DEFAULT_NAME "#" ROBOT_COLOR_ALTERNATE_NAME;
-static parse_token_string_t cmd_start_color =
+static const parse_pgm_token_string_t cmd_start_color =
 TOKEN_STRING_INITIALIZER(struct cmd_start_result, color, str_start_color);
 static const prog_char str_start_debug[] = "debug#match";
-static parse_token_string_t cmd_start_debug =
+static const parse_pgm_token_string_t cmd_start_debug =
 TOKEN_STRING_INITIALIZER(struct cmd_start_result, debug, str_start_debug);
 
 static const prog_char help_start[] = "Start the robot (start " \
 				ROBOT_COLOR_DEFAULT_NAME "#" ROBOT_COLOR_ALTERNATE_NAME \
 				" debug#match)";
-parse_inst_t cmd_start = {
+const parse_pgm_inst_t  cmd_start = {
 	.f = cmd_start_parsed,
 	.data = NULL,
 	.help_str = help_start,
@@ -462,11 +462,11 @@ static void cmd_interact_parsed(void *parsed_result, void *data)
 }
 
 static const prog_char str_interact_arg0[] = "interact";
-static parse_token_string_t cmd_interact_arg0 =
+static const parse_pgm_token_string_t cmd_interact_arg0 =
 TOKEN_STRING_INITIALIZER(struct cmd_interact_result, arg0, str_interact_arg0);
 
 static const prog_char help_interact[] = "Interactive mode";
-parse_inst_t cmd_interact = {
+const parse_pgm_inst_t  cmd_interact = {
 	.f = cmd_interact_parsed,
 	.data = NULL,
 	.help_str = help_interact,
@@ -500,14 +500,14 @@ static void cmd_color_parsed(void *parsed_result, void *data)
 }
 
 static const prog_char str_color_arg0[] = "color";
-static parse_token_string_t cmd_color_arg0 =
+static const parse_pgm_token_string_t cmd_color_arg0 =
 TOKEN_STRING_INITIALIZER(struct cmd_color_result, arg0, str_color_arg0);
 static const prog_char str_color_color[] = ROBOT_COLOR_DEFAULT_NAME "#" ROBOT_COLOR_ALTERNATE_NAME;
-static parse_token_string_t cmd_color_color =
+static const parse_pgm_token_string_t cmd_color_color =
 TOKEN_STRING_INITIALIZER(struct cmd_color_result, color, str_color_color);
 
 static const prog_char help_color[] = "Set our color";
-parse_inst_t cmd_color = {
+const parse_pgm_inst_t  cmd_color = {
 	.f = cmd_color_parsed,
 	.data = NULL,
 	.help_str = help_color,
@@ -551,14 +551,14 @@ static void cmd_rs_parsed(void *parsed_result, void *data)
 }
 
 static const prog_char str_rs_arg0[] = "rs";
-static parse_token_string_t cmd_rs_arg0 =
+static const parse_pgm_token_string_t cmd_rs_arg0 =
 TOKEN_STRING_INITIALIZER(struct cmd_rs_result, arg0, str_rs_arg0);
 static const prog_char str_rs_arg1[] = "show";
-static parse_token_string_t cmd_rs_arg1 =
+static const parse_pgm_token_string_t cmd_rs_arg1 =
 TOKEN_STRING_INITIALIZER(struct cmd_rs_result, arg1, str_rs_arg1);
 
 static const prog_char help_rs[] = "Show rs (robot system) values";
-parse_inst_t cmd_rs = {
+const parse_pgm_inst_t  cmd_rs = {
 	.f = cmd_rs_parsed,
 	.data = NULL,
 	.help_str = help_rs,

@@ -35,7 +35,7 @@
 #include "main.h"
 
 struct ax12_command {
-	const const prog_char *name;
+	const prog_char *name;
 	uint8_t addr;
 	uint8_t size;
 };
@@ -154,17 +154,17 @@ static void cmd_ax12_stress_parsed(void *parsed_result, void *data)
 	printf_P(PSTR("Test done in %d ms\r\n"), (int)t);
 }
 
-static const const prog_char str_ax12_stress_arg0[] = "ax12_stress";
-static const parse_token_string_t cmd_ax12_stress_arg0 =
+static const prog_char  str_ax12_stress_arg0[] = "ax12_stress";
+static const parse_pgm_token_string_t cmd_ax12_stress_arg0 =
 TOKEN_STRING_INITIALIZER(struct cmd_ax12_stress_result, arg0,
 			 str_ax12_stress_arg0);
-static const parse_token_num_t cmd_ax12_stress_id =
+static const parse_pgm_token_num_t cmd_ax12_stress_id =
 TOKEN_NUM_INITIALIZER(struct cmd_ax12_stress_result, id, UINT8);
-static const parse_token_num_t cmd_ax12_stress_iter =
+static const parse_pgm_token_num_t cmd_ax12_stress_iter =
 TOKEN_NUM_INITIALIZER(struct cmd_ax12_stress_result, iter, UINT16);
 
-static const const prog_char help_ax12_stress[] = "Stress an AX12 with 'read id' commands (id, iter)";
-parse_inst_t cmd_ax12_stress = {
+static const prog_char help_ax12_stress[] = "Stress an AX12 with 'read id' commands (id, iter)";
+const parse_pgm_inst_t  cmd_ax12_stress = {
 	.f = cmd_ax12_stress_parsed,
 	.data = NULL,
 	.help_str = help_ax12_stress,
@@ -199,14 +199,14 @@ static void cmd_baudrate_parsed(void *parsed_result, void *data)
 	printf_P(PSTR("%u\r\n"), UBRR2);
 }
 
-static const const prog_char str_baudrate_arg0[] = "ax12_baudrate";
-static const parse_token_string_t cmd_baudrate_arg0 =
+static const prog_char  str_baudrate_arg0[] = "ax12_baudrate";
+static const parse_pgm_token_string_t cmd_baudrate_arg0 =
 TOKEN_STRING_INITIALIZER(struct cmd_baudrate_result, arg0, str_baudrate_arg0);
-static const parse_token_num_t cmd_baudrate_arg1 =
+static const parse_pgm_token_num_t cmd_baudrate_arg1 =
 TOKEN_NUM_INITIALIZER(struct cmd_baudrate_result, arg1, UINT32);
 
-static const const prog_char help_baudrate[] = "Change AX12 baudrate";
-parse_inst_t cmd_ax12_baudrate = {
+static const prog_char help_baudrate[] = "Change AX12 baudrate";
+const parse_pgm_inst_t  cmd_ax12_baudrate = {
 	.f = cmd_baudrate_parsed,
 	.data = NULL,
 	.help_str = help_baudrate,
@@ -250,10 +250,10 @@ static void cmd_read_parsed(void *parsed_result, void *data)
 		printf_P(PSTR("%s: %d [0x%.4x]\r\n"), res->reg, val16, val16);
 }
 
-static const const prog_char str_read_arg0[] = "ax12_read";
-static const parse_token_string_t cmd_read_arg0 =
+static const prog_char  str_read_arg0[] = "ax12_read";
+static const parse_pgm_token_string_t cmd_read_arg0 =
 TOKEN_STRING_INITIALIZER(struct cmd_read_result, arg0, str_read_arg0);
-static const const prog_char str_read_reg[] =
+static const prog_char  str_read_reg[] =
     "moving_speed#model#goal_pos#cw_angle_limit#ccw_angle_limit#"
     "max_torque#down_calibration#up_calibration#torque_limit#"
     "position#speed#load#punch#"
@@ -262,13 +262,13 @@ static const const prog_char str_read_reg[] =
     "alarm_shutdown#torque_enable#led#cw_comp_margin#"
     "ccw_comp_margin#cw_comp_slope#ccw_comp_slope#"
     "voltage#temp#reginst#moving#lock";
-static const parse_token_string_t cmd_read_reg =
+static const parse_pgm_token_string_t cmd_read_reg =
 TOKEN_STRING_INITIALIZER(struct cmd_read_result, reg, str_read_reg);
-static const parse_token_num_t cmd_read_id =
+static const parse_pgm_token_num_t cmd_read_id =
 TOKEN_NUM_INITIALIZER(struct cmd_read_result, id, UINT8);
 
-static const const prog_char help_read[] = "Read an AX12 register (id, reg)";
-parse_inst_t cmd_ax12_read = {
+static const prog_char help_read[] = "Read an AX12 register (id, reg)";
+const parse_pgm_inst_t  cmd_ax12_read = {
 	.f = cmd_read_parsed,
 	.data = NULL,
 	.help_str = help_read,
@@ -311,25 +311,25 @@ static void cmd_write_parsed(void *parsed_result, void *data)
 		printf_P(PSTR("AX12 error %d\r\n"), (int8_t)ret);
 }
 
-static const const prog_char str_write_arg0[] = "ax12_write";
-static const parse_token_string_t cmd_write_arg0 =
+static const prog_char  str_write_arg0[] = "ax12_write";
+static const parse_pgm_token_string_t cmd_write_arg0 =
 TOKEN_STRING_INITIALIZER(struct cmd_write_result, arg0, str_write_arg0);
-static const const prog_char str_write_reg[] =
+static const prog_char  str_write_reg[] =
     "moving_speed#goal_pos#cw_angle_limit#ccw_angle_limit#"
     "max_torque#torque_limit#punch#"
     "id#baudrate#delay#high_lim_temp#"
     "low_lim_volt#high_lim_volt#status_return#alarm_led#"
     "alarm_shutdown#torque_enable#led#cw_comp_margin#"
     "ccw_comp_margin#cw_comp_slope#ccw_comp_slope#" "reginst#lock";
-static const parse_token_string_t cmd_write_reg =
+static const parse_pgm_token_string_t cmd_write_reg =
 TOKEN_STRING_INITIALIZER(struct cmd_write_result, reg, str_write_reg);
-static const parse_token_num_t cmd_write_id =
+static const parse_pgm_token_num_t cmd_write_id =
 TOKEN_NUM_INITIALIZER(struct cmd_write_result, id, UINT8);
-static const parse_token_num_t cmd_write_val =
+static const parse_pgm_token_num_t cmd_write_val =
 TOKEN_NUM_INITIALIZER(struct cmd_write_result, val, UINT16);
 
-static const const prog_char help_write[] = "Write an AX12 register (id, reg, value)";
-parse_inst_t cmd_ax12_write = {
+static const prog_char help_write[] = "Write an AX12 register (id, reg, value)";
+const parse_pgm_inst_t  cmd_ax12_write = {
 	.f = cmd_write_parsed,
 	.data = NULL,
 	.help_str = help_write,

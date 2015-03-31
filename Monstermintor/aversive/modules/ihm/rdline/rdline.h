@@ -33,6 +33,7 @@
 
 #include <cirbuf.h>
 #include <vt100.h>
+#include <rdline_config.h>
 
 #define vt100_bell         "\007"
 #define vt100_bs           "\010"
@@ -56,12 +57,19 @@
 #define vt100_word_left    "\033\142"
 #define vt100_word_right   "\033\146"
 
-/* configuration */
+/* default configuration */
+#ifndef RDLINE_BUF_SIZE
 #define RDLINE_BUF_SIZE 64
+#endif
+#ifndef RDLINE_PROMPT_SIZE
 #define RDLINE_PROMPT_SIZE  16
+#endif
+#ifndef RDLINE_VT100_BUF_SIZE
 #define RDLINE_VT100_BUF_SIZE  8
+#endif
+#ifndef RDLINE_HISTORY_BUF_SIZE
 #define RDLINE_HISTORY_BUF_SIZE 128
-#define RDLINE_HISTORY_MAX_LINE 64
+#endif
 
 enum rdline_status {
 	RDLINE_STOPPED,

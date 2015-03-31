@@ -39,18 +39,16 @@
  *   |                   |  | back length
  *   |___________________|  v
  *    <----------------->
- *         width
+ *           width
  *
- * The rotation radius is the distance between points 1 and 2 (only valid when
- * arms are closed).
  */
 #define ROBOT_ARMS_LENGTH	0
-#define ROBOT_FRONT_LENGTH	190 
-#define ROBOT_BACK_LENGTH	45
+#define ROBOT_FRONT_LENGTH	135 
+#define ROBOT_BACK_LENGTH	135
 #define ROBOT_BODY_LENGTH	(ROBOT_BACK_LENGTH + ROBOT_FRONT_LENGTH)
-#define ROBOT_WIDTH		240
-#define ROBOT_RADIUS		142.50 //Distance entre le milieu de chaque roue
-#define ROBOT_GLASS_DISTANCE	50
+#define ROBOT_WIDTH		330
+#define ROBOT_RADIUS		230 // Distance entre le milieu de chaque roue
+#define ROBOT_GLASS_DISTANCE	25 // 25 mm avant que le gobelet soit a fond dans l'ascenseur
 
 /*
  * Encoder wheels parameters
@@ -72,13 +70,13 @@
 #define ENC_PULSE_GAIN_LEFT	(ENC_PULSE_COEFF*1.000)
 #define ENC_PULSE_GAIN_RIGHT	(ENC_PULSE_COEFF*1.00)
 
-#define ENC_PULSE_PER_TURN	1024
+#define ENC_PULSE_PER_TURN	1024 
 #define ENC_WHEEL_DIAMETER_MM	36.30
 #define ENC_PULSE_PER_MM	(((ENC_PULSE_PER_TURN * 4) / \
 				  (ENC_WHEEL_DIAMETER_MM * M_PI)) * \
 				 ENC_PULSE_COEFF)
 
-#define ENC_TRACK_MM		227.83 //Distance entre les deux encodeurs
+#define ENC_TRACK_MM		319 //Distance entre les deux encodeurs
 
 #ifndef INV_FRONT_REAR_OF_ROBOT
 #define LEFT_ENCODER		((void *)1)

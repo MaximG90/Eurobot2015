@@ -64,11 +64,11 @@ void wings_init(void)
 {
 	struct AX12 *ax12 = &gen.ax12;
 
-	AX12_set_position(ax12, ID_AX12_WING_LEFT, WING_PUSH);
+	AX12_set_position(ax12, ID_AX12_GUIDE, WING_PUSH);
 	wait_ms(20);
 	AX12_set_position(ax12, ID_AX12_WING_RIGHT, WING_PUSH);
 	wait_ms(200);
-	AX12_set_position(ax12, ID_AX12_WING_LEFT, WING_RETRACTED);
+	AX12_set_position(ax12, ID_AX12_GUIDE, WING_RETRACTED);
 	wait_ms(20);
 	AX12_set_position(ax12, ID_AX12_WING_RIGHT, WING_RETRACTED);
 }
